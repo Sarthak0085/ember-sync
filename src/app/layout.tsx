@@ -4,7 +4,6 @@ import './globals.css';
 import { Toaster } from 'sonner';
 
 import { AuthProvider } from '@/context/auth';
-import { Header } from '@/components/header';
 import { MainLayoutWrapper } from '@/components/main-layout';
 
 const geistSans = Geist({

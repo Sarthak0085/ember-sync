@@ -11,7 +11,7 @@ interface CustomInputProps {
   icon: LucideIcon;
   type: string;
   placeholder?: string;
-  field: any;
+  field: unknown;
   textarea?: {
     rows: number;
   };
@@ -32,7 +32,7 @@ export const CustomInput = ({
           placeholder={placeholder}
           className='px-8'
           rows={textarea.rows}
-          {...field}
+          {...field!}
         />
       ) : (
         <Input
@@ -41,7 +41,7 @@ export const CustomInput = ({
           }
           placeholder={placeholder}
           className='px-8'
-          {...field}
+          {...field!}
         />
       )}
       <div

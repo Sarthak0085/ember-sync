@@ -2,7 +2,6 @@
 
 import { auth, firestore } from '@/firebase/server';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 
 interface SetTokenProps {
   token: string;
@@ -60,5 +59,4 @@ export const removeToken = async () => {
   const cookieStore = await cookies();
   cookieStore.delete('firebase_auth_access_token');
   cookieStore.delete('firebase_auth_refresh_token');
-  // redirect('/auth/login');
 };

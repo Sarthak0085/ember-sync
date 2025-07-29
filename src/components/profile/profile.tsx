@@ -38,16 +38,16 @@ export const Profile = ({ data: profile }: ProfileProps) => {
           </div>
           <div className='flex flex-col items-center gap-4 mb-4'>
             <Avatar className='h-28 w-28 border-4 border-primary/20 '>
-              <AvatarImage src={profile.image} alt={profile.fullName} />
+              <AvatarImage src={profile?.image} alt={profile?.fullName} />
               <AvatarFallback className='text-4xl bg-blue-400'>
-                {profile.fullName.charAt(0).toUpperCase()}
+                {profile?.fullName?.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
             <CardTitle className='text-3xl font-extrabold text-gray-900 dark:text-white'>
-              {profile.fullName}
+              {profile?.fullName}
             </CardTitle>
             <CardDescription className='text-lg text-gray-600 dark:text-gray-400'>
-              @{profile.username}
+              @{profile?.username}
             </CardDescription>
           </div>
         </CardHeader>
@@ -64,16 +64,16 @@ export const Profile = ({ data: profile }: ProfileProps) => {
                   Email
                 </Label>
                 <p className='text-gray-900 dark:text-gray-100 font-medium'>
-                  {profile.email}
+                  {profile?.email}
                 </p>
               </div>
-              {profile.phoneNumber && (
+              {profile?.phoneNumber && (
                 <div>
                   <Label className='text-gray-500 dark:text-gray-400'>
                     Phone Number
                   </Label>
                   <p className='text-gray-900 dark:text-gray-100'>
-                    {profile.phoneNumber}
+                    {profile?.phoneNumber}
                   </p>
                 </div>
               )}
@@ -82,7 +82,7 @@ export const Profile = ({ data: profile }: ProfileProps) => {
                   Joined On
                 </Label>
                 <p className='text-gray-900 dark:text-gray-100'>
-                  {format(new Date(profile?.createdAt!), 'MMM dd, yyyy')}
+                  {format(new Date(profile?.createdAt as Date), 'MMM dd, yyyy')}
                 </p>
               </div>
             </div>
@@ -99,7 +99,7 @@ export const Profile = ({ data: profile }: ProfileProps) => {
                 Description
               </Label>
               <p className='text-gray-900 dark:text-gray-100 whitespace-pre-line'>
-                {profile.description}
+                {profile?.description}
               </p>
             </div>
           </div>
@@ -115,16 +115,16 @@ export const Profile = ({ data: profile }: ProfileProps) => {
                   Degree
                 </Label>
                 <p className='text-gray-900 dark:text-gray-100'>
-                  {profile.degree}
+                  {profile?.degree}
                 </p>
               </div>
-              {profile.field && (
+              {profile?.field && (
                 <div>
                   <Label className='text-gray-500 dark:text-gray-400'>
                     Field of Study
                   </Label>
                   <p className='text-gray-900 dark:text-gray-100'>
-                    {profile.field}
+                    {profile?.field}
                   </p>
                 </div>
               )}
@@ -133,7 +133,7 @@ export const Profile = ({ data: profile }: ProfileProps) => {
                   Institute
                 </Label>
                 <p className='text-gray-900 dark:text-gray-100'>
-                  {profile.institute}
+                  {profile?.institute}
                 </p>
               </div>
               <div>
@@ -141,7 +141,7 @@ export const Profile = ({ data: profile }: ProfileProps) => {
                   Start Year
                 </Label>
                 <p className='text-gray-900 dark:text-gray-100'>
-                  {format(profile.startYear, 'MMM dd, yyyy')}
+                  {format(profile?.startYear, 'MMM dd, yyyy')}
                 </p>
               </div>
               <div>
@@ -149,7 +149,7 @@ export const Profile = ({ data: profile }: ProfileProps) => {
                   Pass Year
                 </Label>
                 <p className='text-gray-900 dark:text-gray-100'>
-                  {format(profile.passYear, 'MMM dd, yyyy')}
+                  {format(profile?.passYear, 'MMM dd, yyyy')}
                 </p>
               </div>
               <div>
@@ -157,7 +157,7 @@ export const Profile = ({ data: profile }: ProfileProps) => {
                   Grade/CGPA
                 </Label>
                 <p className='text-gray-900 dark:text-gray-100'>
-                  {profile.grade}
+                  {profile?.grade}
                 </p>
               </div>
             </div>

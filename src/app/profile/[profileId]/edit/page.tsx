@@ -6,9 +6,7 @@ import { ProfileForm } from '@/components/profile/profile-form';
 import { Button } from '@/components/ui/button';
 
 interface ProfileDetailsPageProps {
-  params: {
-    profileId: string;
-  };
+  params: Promise<{ profileId: string }>;
 }
 
 export default async function ProfileDetailsPage({
@@ -23,7 +21,7 @@ export default async function ProfileDetailsPage({
       <div className='flex flex-col items-center justify-center min-h-screen'>
         <h1 className='font-bold text-2xl'>No Profile Exists</h1>
         <p className='text-lg text-muted-foreground mb-8 max-w-md'>
-          It looks like your profile hasn't been created yet.
+          It looks like your profile hasn&apos;t been created yet.
         </p>
         <div className='grid sm:grid-cols-2 gap-4'>
           <Button

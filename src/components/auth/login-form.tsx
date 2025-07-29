@@ -3,10 +3,7 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { LockIcon, MailIcon } from 'lucide-react';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { toast } from 'sonner';
 import { auth } from '@/firebase/client';
 import { zodResolver } from '@hookform/resolvers/zod';

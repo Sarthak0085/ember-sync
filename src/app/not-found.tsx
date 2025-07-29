@@ -19,7 +19,8 @@ export default function NotFound() {
       </h1>
       <h2 className='text-2xl md:text-4xl font-bold mb-4'>Page Not Found</h2>
       <p className='text-lg md:text-xl mb-8 max-w-md'>
-        Oops! The page you're looking for doesn't exist or has been moved.
+        Oops! The page you&apos;re looking for doesn&apos;t exist or has been
+        moved.
       </p>
       <Button
         onClick={handleGoHome}

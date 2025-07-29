@@ -2,14 +2,10 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-// public routes
-const publicRoutes = ['/auth/login', '/auth/register', '/'];
-
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Check if the current path is a public route
-  const isPublicRoute = publicRoutes.some((route) => pathname === route);
   const isProtectedRoute = pathname.startsWith('/profile');
 
   // find the cookies
