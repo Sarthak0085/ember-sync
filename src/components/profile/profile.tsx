@@ -23,7 +23,7 @@ interface ProfileProps {
 export const Profile = ({ data: profile }: ProfileProps) => {
   const router = useRouter();
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen py-8 px-4 bg-gradient-to-br from-blue-50 to-emerald-50 dark:bg-gray-950'>
+    <div className='flex flex-col items-center justify-center min-h-screen py-8 px-4 bg-transparent'>
       <Card className='w-full max-w-3xl bg-transparent dark:bg-gray-900 p-8 rounded-lg shadow-xl'>
         <CardHeader className='text-center pb-6 border-b dark:border-gray-700'>
           <div className='flex justify-end'>
