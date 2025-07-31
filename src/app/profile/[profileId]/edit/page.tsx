@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-import { getProfileByIdAndOwnership } from '@/app/profile/action';
+import { getProfileById } from '@/app/profile/action';
 import { ProfileForm } from '@/components/profile/profile-form';
 import { Button } from '@/components/ui/button';
+import { Profile } from '@/types';
 
 interface ProfileDetailsPageProps {
   params: Promise<{ profileId: string }>;
@@ -13,7 +14,7 @@ export default async function ProfileDetailsPage({
   params,
 }: ProfileDetailsPageProps) {
   const { profileId } = await params;
-  const result = await getProfileByIdAndOwnership(profileId);
+  const result = await getProfileById(profileId);
   const data = result?.data;
 
   if (!data) {
@@ -45,7 +46,7 @@ export default async function ProfileDetailsPage({
 
   return (
     <div className='w-full flex items-center justify-center min-h-screen py-4'>
-      <ProfileForm data={data} />
+      <ProfileForm data={data as Profile} />
     </div>
   );
 }

@@ -37,7 +37,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { ProfileFormData, profileSchema } from '@/lib/schemas';
 import { useAuth } from '@/context/auth';
-import { saveProfile, updateProfile } from '@/app/profile/action';
+import { saveProfile } from '@/app/profile/action';
 import { Profile } from '@/types';
 
 interface ProfileFormProps {
@@ -51,7 +51,7 @@ export const ProfileForm = ({ data }: ProfileFormProps) => {
   const form = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      fullName: data?.fullName ?? '',
+      displayName: data?.displayName || '',
       username: data?.username ?? '',
       email: data?.email ?? '',
       description: data?.description ?? '',
@@ -73,31 +73,14 @@ export const ProfileForm = ({ data }: ProfileFormProps) => {
       toast.error('Please login to access this.');
       return;
     }
-
-    if (data && data.id) {
-      const response = await updateProfile({
-        values,
-        token,
-        profileId: data?.id,
-      });
-      console.log('Response', response);
-      if (response.error || response.success === false) {
-        toast.error(response?.error ?? response?.message);
-        return;
-      } else {
-        toast.success('Profile updated successfully');
-        router.push(`/profile`);
-      }
+    const response = await saveProfile({ values, token });
+    console.log('Response', response);
+    if (response.error || response.success === false) {
+      toast.error(response?.error ?? response?.message);
+      return;
     } else {
-      const response = await saveProfile({ values, token });
-      console.log('Response', response);
-      if (response.error || response.success === false) {
-        toast.error(response?.error ?? response?.message);
-        return;
-      } else {
-        toast.success('Profile created successfully');
-        router.push(`/profile`);
-      }
+      toast.success('Profile updated successfully');
+      router.push(`/profile`);
     }
   };
 
@@ -125,7 +108,7 @@ export const ProfileForm = ({ data }: ProfileFormProps) => {
               <div className='w-full flex flex-col sm:flex-row items-center gap-4'>
                 <FormField
                   control={form.control}
-                  name='fullName'
+                  name='displayName'
                   render={({ field }) => (
                     <FormItem className='w-full'>
                       <FormLabel>
@@ -149,8 +132,7 @@ export const ProfileForm = ({ data }: ProfileFormProps) => {
                   render={({ field }) => (
                     <FormItem className='w-full'>
                       <FormLabel>
-                        Username ( Unique ){' '}
-                        <span className='text-destructive'>*</span>
+                        Username <span className='text-destructive'>*</span>
                       </FormLabel>
                       <FormControl>
                         <CustomInput
@@ -181,6 +163,7 @@ export const ProfileForm = ({ data }: ProfileFormProps) => {
                           placeholder='example@gmail.com'
                           icon={MailIcon}
                           field={field}
+                          readOnly
                         />
                       </FormControl>
                       <FormMessage />

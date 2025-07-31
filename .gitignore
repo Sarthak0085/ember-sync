@@ -43,3 +43,6 @@ yarn-error.log*
 next-env.d.ts
 
 embersync-42f25-firebase-adminsdk-fbsvc-eb60969b8b.json
+.firebaserc
+firebase.json
+functions

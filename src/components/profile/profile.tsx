@@ -38,13 +38,13 @@ export const Profile = ({ data: profile }: ProfileProps) => {
           </div>
           <div className='flex flex-col items-center gap-4 mb-4'>
             <Avatar className='h-28 w-28 border-4 border-primary/20 '>
-              <AvatarImage src={profile?.image} alt={profile?.fullName} />
+              <AvatarImage src={profile?.image} alt={profile?.displayName} />
               <AvatarFallback className='text-4xl bg-blue-400'>
-                {profile?.fullName?.charAt(0).toUpperCase()}
+                {profile?.displayName?.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
             <CardTitle className='text-3xl font-extrabold text-gray-900 dark:text-white'>
-              {profile?.fullName}
+              {profile?.displayName}
             </CardTitle>
             <CardDescription className='text-lg text-gray-600 dark:text-gray-400'>
               @{profile?.username}

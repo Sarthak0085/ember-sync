@@ -37,9 +37,9 @@ export type LoginFormData = z.infer<typeof loginSchema>;
 
 export const profileSchema = z
   .object({
-    fullName: z
-      .string('Full Name is required')
-      .min(2, 'Full Name must contains atleast 2 characters'),
+    displayName: z
+      .string('Display Name is required')
+      .min(2, 'Display Name must contains atleast 2 characters'),
     username: z
       .string('Username is required')
       .min(2, 'Username must contains atleast 2 characters'),

@@ -1,6 +1,6 @@
 export type Profile = {
   id: string;
-  fullName: string;
+  displayName: string;
   username: string;
   email: string;
   image: string;
@@ -12,7 +12,6 @@ export type Profile = {
   grade: string;
   startYear: Date;
   passYear: Date;
-  userId: string;
   createdAt?: Date;
   updatedAt?: Date;
 };

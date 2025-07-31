@@ -12,6 +12,7 @@ interface CustomInputProps {
   type: string;
   placeholder?: string;
   field: unknown;
+  readOnly?: boolean;
   textarea?: {
     rows: number;
   };
@@ -22,6 +23,7 @@ export const CustomInput = ({
   type,
   field,
   placeholder,
+  readOnly,
   textarea,
 }: CustomInputProps) => {
   const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
@@ -41,6 +43,8 @@ export const CustomInput = ({
           }
           placeholder={placeholder}
           className='px-8'
+          readOnly={readOnly}
+          disabled={readOnly}
           {...field!}
         />
       )}

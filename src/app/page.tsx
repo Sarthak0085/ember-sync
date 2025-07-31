@@ -8,6 +8,7 @@ import Link from 'next/link';
 
 export default function Home() {
   const auth = useAuth();
+  console.log(auth?.currentUser, 'user');
   return (
     <main className='flex flex-col items-center justify-center min-h-[calc(100vh-80px)] px-4 py-12 text-center'>
       <section className='max-w-6xl w-full flex flex-col items-center md:flex-row gap-4'>

@@ -33,17 +33,18 @@ export const setToken = async ({ token, refreshToken }: SetTokenProps) => {
 
     if (!user.exists) {
       await userDoc.set({
-        fullName: verifiedToken.name || verifiedToken.fullName || null,
+        displayName: verifiedToken.displayName || null,
         email: verifiedToken.email || null,
         role: 'user',
         createdAt: new Date(),
-        image: verifiedToken.picture || null,
+        image: verifiedToken.photoUrl || null,
         lastLoginAt: new Date(),
         emailVerified: verifiedToken.email_verified ?? false,
       });
       console.log(`Firestore profile created for new user: ${uid}`);
     } else {
       await userDoc.update({
+        emailVerified: verifiedToken?.email_verified === true ? true : false,
         lastLoginAt: new Date(),
       });
       console.log(

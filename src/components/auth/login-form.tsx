@@ -3,7 +3,11 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { LockIcon, MailIcon } from 'lucide-react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
 import { toast } from 'sonner';
 import { auth } from '@/firebase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -34,9 +38,29 @@ export const LoginForm = () => {
 
   const onSubmit = async (values: LoginFormData) => {
     try {
-      await signInWithEmailAndPassword(auth, values.email, values.password);
-      toast.success('Logged In successfully');
-      router.push('/');
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password,
+      );
+
+      const user = userCredential.user;
+      if (user.emailVerified === true) {
+        toast.success('Logged In successfully');
+        router.push('/');
+      } else {
+        await signOut(auth);
+        const actions = {
+          url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/profile/setup`,
+          handleCodeInApp: true,
+        };
+        await sendEmailVerification(user, actions);
+
+        toast.error(
+          'Please verify your email address before logging in. A new verification email has been sent.',
+        );
+        router.push('/auth/login');
+      }
     } catch (err: any) {
       console.error('Registration Error:', err);
       if (err.code === 'auth/email-already-in-use') {

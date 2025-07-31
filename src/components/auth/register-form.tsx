@@ -3,7 +3,11 @@
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+} from 'firebase/auth';
 import { LockIcon, MailIcon, UserIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -28,10 +32,10 @@ export const RegisterForm = () => {
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
+      name: 'user',
+      email: 'user@example.com',
+      password: 'P@$$w0rd',
+      confirmPassword: 'P@$$w0rd',
     },
   });
 
@@ -44,12 +48,17 @@ export const RegisterForm = () => {
       );
       const user = userResult.user;
 
-      const token = await user.getIdToken();
-      const refreshToken = user.refreshToken;
-      if (token && refreshToken) {
-        await setToken({ token, refreshToken });
-      }
-      router.push('/profile/setup');
+      await updateProfile(user, {
+        displayName: values.name,
+      });
+
+      const actionCodeSettings = {
+        url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/profile/setup`,
+        handleCodeInApp: true,
+      };
+
+      await sendEmailVerification(user, actionCodeSettings);
+      toast.success('Verify Email send to your email. Please verify that');
     } catch (err: any) {
       console.error('Registration Error:', err);
       if (err.code === 'auth/email-already-in-use') {
